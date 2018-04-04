@@ -2,6 +2,11 @@ package com.example.controller;
 
 import com.example.model.Book;
 import com.example.service.BookService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.fasterxml.jackson.databind.util.JSONWrappedObject;
+import jdk.nashorn.api.scripting.JSObject;
+import jdk.nashorn.internal.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -46,10 +51,17 @@ public class BookController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(value = {"/books"}, method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> update(@RequestBody Book book) {
+    @RequestMapping(value = {"/books"}, method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> update(@RequestBody String book) {
+
+
         try {
-            bookService.update(book);
+//            JSONWrappedObject ob = new JSONWrappedObject(book);
+            Book bookObj = new Book();
+            ObjectMapper objectMapper = new ObjectMapper();
+            bookObj = objectMapper.readValue(book, Book.class);
+
+            bookService.update(bookObj);
         } catch (Exception e) {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }

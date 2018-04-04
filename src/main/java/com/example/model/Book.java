@@ -16,7 +16,7 @@ public class Book implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "book_id")
+    @Column(name = "id")
     private Long id;
     @Column(name = "title")
     @NotEmpty(message = "*Please provide a title")
