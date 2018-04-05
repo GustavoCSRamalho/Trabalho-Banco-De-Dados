@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.model.Book;
 import com.example.service.BookService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -19,11 +21,19 @@ public class BookController {
     private BookService bookService;
 
 
-    @RequestMapping(value = {"/books"}, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = {"/books"}, method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public void create(@Valid @RequestBody Book book) {
-        bookService.create(book);
+    public ResponseEntity<?> create(@Valid @RequestBody String book) throws IOException {
+
+        try {
+            Book b = null;
+            ObjectMapper obj = new ObjectMapper();
+            b = obj.readValue(book, Book.class);
+            bookService.create(b);
+        }catch(Exception e){
+            return new  ResponseEntity(book,HttpStatus.CONFLICT);
+        }
+        return new ResponseEntity(book,HttpStatus.OK);
     }
 
     @RequestMapping(value = {"/books"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -36,23 +46,27 @@ public class BookController {
         return new ResponseEntity<Book>(bookService.findById(id), HttpStatus.OK);
     }
 
-    @RequestMapping(value = {"/books"}, method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> delete(@RequestBody Book book ) {
+    @RequestMapping(value = {"/books"}, method = RequestMethod.DELETE)
+    public ResponseEntity<?> delete(@RequestParam(name = "id") long book ) {
         try {
-            bookService.delete(book.getId());
+            bookService.delete(book);
         } catch (Exception e) {
-            return new ResponseEntity(HttpStatus.CONFLICT);
+            return new ResponseEntity(book,HttpStatus.CONFLICT);
         }
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity(book, HttpStatus.OK);
     }
 
     @RequestMapping(value = {"/books"}, method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> update(@RequestBody Book book) {
+    public ResponseEntity<?> update(@RequestBody String book) {
         try {
-            bookService.update(book);
+            Book b = null;
+            ObjectMapper obj = new ObjectMapper();
+            b = obj.readValue(book,Book.class);
+
+            bookService.update(b);
         } catch (Exception e) {
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
+            return new ResponseEntity(book,HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity(book,HttpStatus.OK);
     }
 }
