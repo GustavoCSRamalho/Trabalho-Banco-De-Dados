@@ -3,6 +3,13 @@ package com.example.controller;
 import com.example.model.Book;
 import com.example.service.BookService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+<<<<<<< HEAD
+=======
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.fasterxml.jackson.databind.util.JSONWrappedObject;
+import jdk.nashorn.api.scripting.JSObject;
+import jdk.nashorn.internal.parser.JSONParser;
+>>>>>>> 5bdae75fa1b0f8546a149b03581bbccb91ca2fbc
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -56,6 +63,7 @@ public class BookController {
         return new ResponseEntity(book, HttpStatus.OK);
     }
 
+<<<<<<< HEAD
     @RequestMapping(value = {"/books"}, method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> update(@RequestBody String book) {
         try {
@@ -64,6 +72,19 @@ public class BookController {
             b = obj.readValue(book,Book.class);
 
             bookService.update(b);
+=======
+    @RequestMapping(value = {"/books"}, method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> update(@RequestBody String book) {
+
+
+        try {
+//            JSONWrappedObject ob = new JSONWrappedObject(book);
+            Book bookObj = new Book();
+            ObjectMapper objectMapper = new ObjectMapper();
+            bookObj = objectMapper.readValue(book, Book.class);
+
+            bookService.update(bookObj);
+>>>>>>> 5bdae75fa1b0f8546a149b03581bbccb91ca2fbc
         } catch (Exception e) {
             return new ResponseEntity(book,HttpStatus.NO_CONTENT);
         }
