@@ -1,8 +1,8 @@
 package com.example.configuration;
 
-import com.example.teste.controller.security.AuthenticationTokenFilter;
-import com.example.teste.controller.security.EntryPointUnauthorizedHandler;
-import com.example.teste.controller.service.SecurityService;
+import com.example.security.AuthenticationTokenFilter;
+import com.example.security.EntryPointUnauthorizedHandler;
+import com.example.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
