@@ -14,22 +14,25 @@ import java.io.Serializable;
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(allowGetters = true)
 @Data
-
 public class Book implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
+
     @Column(name = "title")
     @NotEmpty(message = "*Please provide a title")
     private String title;
+
     @Column(name = "description")
     @NotEmpty(message = "*Please provide a description")
     private String description;
+
     @Column(name = "price")
     @NotEmpty(message = "*Please provide a price")
     private String price;
+
     @Column(name = "author")
     @NotEmpty(message = "*Please provide the name  of the author")
     private String author;

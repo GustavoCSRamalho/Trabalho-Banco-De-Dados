@@ -1,9 +1,8 @@
 package com.example.controller;
 
 
-import com.example.service.BookService;
 import com.example.model.entity.Book;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.example.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -23,21 +21,18 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-
     @RequestMapping(value = {"/books"}, method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public ResponseEntity<?> create(@Valid @RequestBody String book) throws IOException {
+    public ResponseEntity<?> create(@Valid @RequestBody Book book) {
 
         try {
-            Book b = null;
-            ObjectMapper obj = new ObjectMapper();
-            b = obj.readValue(book, Book.class);
-            bookService.create(b);
-        }catch(Exception e){
-            return new  ResponseEntity(book,HttpStatus.CONFLICT);
+
+            bookService.create(book);
+        } catch (Exception e) {
+            return new ResponseEntity(book, HttpStatus.CONFLICT);
         }
-        return new ResponseEntity(book,HttpStatus.OK);
+        return new ResponseEntity(book, HttpStatus.OK);
     }
+
 
     @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
 //    @PreAuthorize("hasAuthority('USER')")
@@ -54,11 +49,11 @@ public class BookController {
 
     @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
     @RequestMapping(value = {"/books"}, method = RequestMethod.DELETE)
-    public ResponseEntity<?> delete(@RequestParam(name = "id") long book ) {
+    public ResponseEntity<?> delete(@RequestParam(name = "id") long book) {
         try {
             bookService.delete(book);
         } catch (Exception e) {
-            return new ResponseEntity(book,HttpStatus.CONFLICT);
+            return new ResponseEntity(book, HttpStatus.CONFLICT);
         }
         return new ResponseEntity(book, HttpStatus.OK);
     }
@@ -72,10 +67,10 @@ public class BookController {
 //            b = obj.readValue(book, Book.class);
 
             bookService.update(book);
-        }catch(Exception e){
-            return new ResponseEntity(book,HttpStatus.CONFLICT);
+        } catch (Exception e) {
+            return new ResponseEntity(book, HttpStatus.CONFLICT);
         }
-        return new ResponseEntity(book,HttpStatus.OK);
+        return new ResponseEntity(book, HttpStatus.OK);
     }
 
 //    @RequestMapping(value = {"/books"}, method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)

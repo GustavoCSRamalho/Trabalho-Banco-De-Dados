@@ -42,6 +42,7 @@ public class AuthenticationController {
     @Autowired
     private TokenUtils tokenUtils;
 
+    //TODO
     @Autowired
     private UserDetailsService userDetailsService;
 
@@ -81,6 +82,7 @@ public class AuthenticationController {
             return ResponseEntity.ok(new AuthenticationResponse(token, username, authorities));
         } else {
             return ResponseEntity.badRequest().body(null);
+
         }
     }
 
