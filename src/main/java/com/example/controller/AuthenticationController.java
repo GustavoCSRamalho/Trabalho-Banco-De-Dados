@@ -88,16 +88,16 @@ public class AuthenticationController {
 
 
     @RequestMapping(value = {"/register"}, method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> create(@RequestBody User user) throws IOException {
+    public ResponseEntity<?> create(@RequestBody User user)  {
 
         try {
             BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
             this.userDetailsServiceImp.saveUser(user);
-        } catch (Exception e) {
+            return new ResponseEntity(user, HttpStatus.OK);
+        } catch (Error e) {
             return new ResponseEntity(user, HttpStatus.CONFLICT);
         }
-        return new ResponseEntity(user, HttpStatus.OK);
     }
 
 }

@@ -28,13 +28,11 @@ public class UserDetailsServiceImpl implements UserDetailsService, UserService {
   }
 
   @Override
-  public void saveUser(User user){
-    try{
-      user.setAuthorities("ADMIN");
+  public void saveUser(User user) throws Error{
+
+    user.setAuthorities("ADMIN");
     this.userRepository.save(user);
-  }catch(Exception e){
-      e.printStackTrace();
-    }
+
   }
 
 }

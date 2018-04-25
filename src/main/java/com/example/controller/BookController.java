@@ -25,26 +25,36 @@ public class BookController {
     public ResponseEntity<?> create(@Valid @RequestBody Book book) {
 
         try {
-
             bookService.create(book);
+            return new ResponseEntity(book, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity(book, HttpStatus.CONFLICT);
         }
-        return new ResponseEntity(book, HttpStatus.OK);
     }
 
-
     @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
-//    @PreAuthorize("hasAuthority('USER')")
     @RequestMapping(value = {"/books"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Book>> findAll() {
-        return new ResponseEntity<List<Book>>(bookService.findAll(), HttpStatus.OK);
+        List<Book> lista = null;
+        try {
+            lista = bookService.findAll();
+            return new ResponseEntity<List<Book>>(lista, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<List<Book>>(lista, HttpStatus.NO_CONTENT);
+        }
     }
 
     @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
     @RequestMapping(value = {"/books/{id}"}, method = RequestMethod.GET)
     public ResponseEntity<Book> findById(@PathVariable(value = "id") Long id) {
-        return new ResponseEntity<Book>(bookService.findById(id), HttpStatus.OK);
+        Book book = null;
+        try {
+            book = bookService.findById(id);
+            return new ResponseEntity<Book>(book, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<Book>(book, HttpStatus.NO_CONTENT);
+        }
+
     }
 
     @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
@@ -52,25 +62,23 @@ public class BookController {
     public ResponseEntity<?> delete(@RequestParam(name = "id") long book) {
         try {
             bookService.delete(book);
+            return new ResponseEntity(book, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity(book, HttpStatus.CONFLICT);
+            return new ResponseEntity(book, HttpStatus.EXPECTATION_FAILED);
         }
-        return new ResponseEntity(book, HttpStatus.OK);
+
     }
 
     @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
     @RequestMapping(value = {"/books"}, method = RequestMethod.PUT)
     public ResponseEntity<?> update(@RequestBody Book book) {
-        try {
-//            Book b = null;
-//            ObjectMapper obj = new ObjectMapper();
-//            b = obj.readValue(book, Book.class);
 
+        try {
             bookService.update(book);
+            return new ResponseEntity(book, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity(book, HttpStatus.CONFLICT);
+            return new ResponseEntity(book, HttpStatus.EXPECTATION_FAILED);
         }
-        return new ResponseEntity(book, HttpStatus.OK);
     }
 
 //    @RequestMapping(value = {"/books"}, method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
