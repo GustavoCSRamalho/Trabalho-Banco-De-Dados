@@ -1,6 +1,6 @@
 package com.example.security;
 
-import com.example.model.entity.CerberusUser;
+import com.example.model.entity.EntityUser;
 import io.jsonwebtoken.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
@@ -144,7 +144,7 @@ public class TokenUtils {
    */
   public Boolean validateToken(String token, UserDetails userDetails) {
     if (userDetails != null) {
-      CerberusUser user = (CerberusUser) userDetails;
+      EntityUser user = (EntityUser) userDetails;
       final String username = this.getUsernameFromToken(token);
       boolean response = (user.getUsername().equals(username));
       return response;

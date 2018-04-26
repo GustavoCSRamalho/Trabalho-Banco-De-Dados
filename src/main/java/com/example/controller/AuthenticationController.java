@@ -3,7 +3,7 @@ package com.example.controller;
 import com.example.model.entity.User;
 import com.example.model.json.request.AuthenticationRequest;
 import com.example.model.json.response.AuthenticationResponse;
-import com.example.model.entity.CerberusUser;
+import com.example.model.entity.EntityUser;
 import com.example.security.TokenUtils;
 import com.example.service.impl.UserDetailsServiceImpl;
 import org.apache.log4j.Logger;
@@ -21,10 +21,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Collection;
 
 @RestController
@@ -73,7 +74,7 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> refreshToken(HttpServletRequest request) {
         String token = request.getHeader(this.tokenHeader);
         String usernameFromToken = this.tokenUtils.getUsernameFromToken(token);
-        CerberusUser user = (CerberusUser) this.userDetailsService.loadUserByUsername(usernameFromToken);
+        EntityUser user = (EntityUser) this.userDetailsService.loadUserByUsername(usernameFromToken);
         Collection<? extends GrantedAuthority>  authorities = user.getAuthorities();
         String username = user.getUsername();
 
@@ -98,6 +99,17 @@ public class AuthenticationController {
         } catch (Error e) {
             return new ResponseEntity(user, HttpStatus.CONFLICT);
         }
+    }
+
+
+    @RequestMapping(value = {"/logout"}, method = RequestMethod.GET)
+    public ResponseEntity<?> logout(HttpServletRequest request, HttpServletResponse response){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if(auth != null){
+            new SecurityContextLogoutHandler().logout(request,response,auth);
+            return new ResponseEntity(auth, HttpStatus.OK);
+        }
+        return new ResponseEntity(auth, HttpStatus.CONFLICT);
     }
 
 }

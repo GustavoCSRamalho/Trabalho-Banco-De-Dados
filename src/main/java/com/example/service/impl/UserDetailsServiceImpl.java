@@ -2,7 +2,7 @@ package com.example.service.impl;
 
 
 import com.example.model.entity.User;
-import com.example.model.factory.CerberusUserFactory;
+import com.example.model.factory.UserFactory;
 import com.example.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,14 +23,14 @@ public class UserDetailsServiceImpl implements UserDetailsService, UserService {
     if (user == null) {
       throw new UsernameNotFoundException(String.format("No user found with username '%s'.", username));
     } else {
-      return CerberusUserFactory.create(user);
+      return UserFactory.create(user);
     }
   }
 
   @Override
   public void saveUser(User user) throws Error{
 
-    user.setAuthorities("ADMIN");
+    user.setAuthorities("COMUM");
     this.userRepository.save(user);
 
   }

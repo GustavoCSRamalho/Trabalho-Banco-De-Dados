@@ -32,10 +32,10 @@ class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     private UserDetailsService userDetailsService;
 
     //TODO
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return super.userDetailsService();
-    }
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        return super.userDetailsService();
+//    }
 
     @Autowired
     private SecurityService securityService;
@@ -88,7 +88,8 @@ class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/api/**").permitAll()//hasAnyRole("ADMIN","USER")
                 .antMatchers("/api/auth").permitAll()
                 .antMatchers("/api/register").permitAll()
-                .antMatchers("/api/books/**").hasAnyAuthority("ADMIN")
+                .antMatchers("/api/logout").permitAll()
+                .antMatchers("/api/books/**").hasAnyAuthority("ADMIN","USER")
 //                .antMatchers("/api/register").permitAll()
 //                .antMatchers("/books/**").permitAll()
 //                .antMatchers("/protected/**").permitAll()

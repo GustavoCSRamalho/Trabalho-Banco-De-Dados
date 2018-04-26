@@ -2,6 +2,8 @@ package com.example.controller;
 
 
 import com.example.model.entity.Book;
+import com.example.model.entity.EntityBook;
+import com.example.model.factory.BookFactory;
 import com.example.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,10 +22,9 @@ public class BookController {
 
     @Autowired
     private BookService bookService;
-
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     @RequestMapping(value = {"/books"}, method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> create(@Valid @RequestBody Book book) {
-
         try {
             bookService.create(book);
             return new ResponseEntity(book, HttpStatus.CREATED);
@@ -46,18 +47,19 @@ public class BookController {
 
     @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
     @RequestMapping(value = {"/books/{id}"}, method = RequestMethod.GET)
-    public ResponseEntity<Book> findById(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<EntityBook> findById(@PathVariable(value = "id") Long id) {
         Book book = null;
+        EntityBook entityBook = null;
         try {
             book = bookService.findById(id);
-            return new ResponseEntity<Book>(book, HttpStatus.OK);
+            entityBook = BookFactory.createFactoryBook(book);
+            return new ResponseEntity<EntityBook>(entityBook, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<Book>(book, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<EntityBook>(entityBook, HttpStatus.NO_CONTENT);
         }
-
     }
 
-    @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     @RequestMapping(value = {"/books"}, method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@RequestParam(name = "id") long book) {
         try {
@@ -66,10 +68,9 @@ public class BookController {
         } catch (Exception e) {
             return new ResponseEntity(book, HttpStatus.EXPECTATION_FAILED);
         }
-
     }
 
-    @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     @RequestMapping(value = {"/books"}, method = RequestMethod.PUT)
     public ResponseEntity<?> update(@RequestBody Book book) {
 
@@ -80,22 +81,4 @@ public class BookController {
             return new ResponseEntity(book, HttpStatus.EXPECTATION_FAILED);
         }
     }
-
-//    @RequestMapping(value = {"/books"}, method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<?> update(@RequestBody String book) {
-//
-//
-//        try {
-////            JSONWrappedObject ob = new JSONWrappedObject(book);
-//            Book bookObj = new Book();
-//            ObjectMapper objectMapper = new ObjectMapper();
-//            bookObj = objectMapper.readValue(book, Book.class);
-//
-//            bookService.update(bookObj);
-//
-//        } catch (Exception e) {
-//            return new ResponseEntity(book,HttpStatus.NO_CONTENT);
-//        }
-//        return new ResponseEntity(book,HttpStatus.OK);
-//    }
 }

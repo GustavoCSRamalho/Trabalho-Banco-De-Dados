@@ -2,8 +2,8 @@ package com.example.service;
 
 public interface SecurityService {
 
-  public Boolean hasProtectedAccess();
+   Boolean hasProtectedAccess();
 
-  public Boolean hasProtectedAdminAccess();
+   Boolean hasProtectedAdminAccess();
 
 }

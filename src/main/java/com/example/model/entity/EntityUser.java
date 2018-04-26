@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Date;
 
-public class CerberusUser implements UserDetails {
+public class EntityUser implements UserDetails {
 
   private Long id;
   private String username;
@@ -19,11 +19,11 @@ public class CerberusUser implements UserDetails {
   private Boolean credentialsNonExpired = true;
   private Boolean enabled = true;
 
-  public CerberusUser() {
+  public EntityUser() {
     super();
   }
 
-  public CerberusUser(Long id, String username, String password, String email, Collection<? extends GrantedAuthority> authorities) {
+  public EntityUser(Long id, String username, String password, String email, Collection<? extends GrantedAuthority> authorities) {
     this.setId(id);
     this.setUsername(username);
     this.setPassword(password);

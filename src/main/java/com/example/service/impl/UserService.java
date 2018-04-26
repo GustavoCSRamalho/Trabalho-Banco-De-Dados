@@ -9,7 +9,5 @@ public interface UserService {
 
     void saveUser(final User user) throws Exception;
 
-//    UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
-
     UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
 }
