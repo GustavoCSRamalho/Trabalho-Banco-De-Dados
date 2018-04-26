@@ -3,7 +3,7 @@ package com.example.model.entity;
 import lombok.Data;
 
 @Data
-public class Message {
+public class  Message {
 
     private String contents;
 
