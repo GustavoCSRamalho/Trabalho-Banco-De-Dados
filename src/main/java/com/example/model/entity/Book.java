@@ -37,5 +37,13 @@ public class Book implements Serializable {
     @NotEmpty(message = "*Please provide the name  of the author")
     private String author;
 
+    public Book(){}
+    public Book(String title, String description, String price,String author){
+        setTitle(title);
+        setAuthor(author);
+        setDescription(description);
+        setPrice(price);
+
+    }
     }
 

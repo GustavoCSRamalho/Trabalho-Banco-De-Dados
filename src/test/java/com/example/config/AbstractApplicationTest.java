@@ -46,6 +46,13 @@ public class AbstractApplicationTest {
                 .contentType(mediaType)).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
     }
 
+    protected String mockMvcPerformAuthenticatedGetResult(final String request, final String body, final String mediaType, ResultMatcher status, final String authentication) throws Exception {
+        return mockMvc.perform(get(request)
+                .content(body)
+                .header(tokenHeader, authentication)
+                .contentType(mediaType)).andExpect(status).andReturn().getResponse().getContentAsString();
+    }
+
     protected String mockMvcPerformAuthenticatedPostResult(final String request, final String body, final String mediaType, ResultMatcher status, final String authentication) throws Exception {
         return mockMvc.perform(post(request)
                 .content(body)
@@ -67,9 +74,9 @@ public class AbstractApplicationTest {
                 .contentType(mediaType)).andExpect(status).andExpect(status).andReturn().getResponse().getStatus();
     }
 
-    protected int mockMvcPerformAuthenticatedDeleteResult(final String request, final String body, final String mediaType, ResultMatcher status, final String authentication) throws Exception {
+    protected int mockMvcPerformAuthenticatedDeleteResult(final String request, final String key,final String param, final String mediaType, ResultMatcher status, final String authentication) throws Exception {
         return mockMvc.perform(delete(request)
-                .content(body)
+                .param(key, param)
                 .header(tokenHeader, authentication)
                 .contentType(mediaType)).andExpect(status).andExpect(status).andReturn().getResponse().getStatus();
     }
@@ -91,6 +98,7 @@ public class AbstractApplicationTest {
     protected String mockMvcPerformAuthenticatedGetAll(final String request, final String authentication) throws Exception {
         return mockMvc.perform(get(request)
                 .header(tokenHeader, authentication)
+                .accept(MediaType.parseMediaType(JSON_UTF8_MEDIA_TYPE))
         ).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
     }
 }
