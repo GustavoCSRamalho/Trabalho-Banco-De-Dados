@@ -34,7 +34,7 @@ public class AuthenticationController {
 
     private final Logger logger = Logger.getLogger(this.getClass());
 
-    @Value("${cerberus.token.header}")
+    @Value("${gustavo.token.header}")
     private String tokenHeader;
 
     @Autowired
@@ -54,20 +54,28 @@ public class AuthenticationController {
     public ResponseEntity<?> authenticationRequest(@RequestBody AuthenticationRequest authenticationRequest) throws AuthenticationException {
 
         // Perform the authentication
+         try{
         Authentication authentication = this.authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         authenticationRequest.getUsername(),
                         authenticationRequest.getPassword()
                 )
         );
+
+
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        // Reload password post-authentication so we can generate token
-        UserDetails userDetails = this.userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
-        String token = this.tokenUtils.generateTokenByUserDetails(userDetails);
+            UserDetails userDetails = this.userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+            String token = this.tokenUtils.generateTokenByUserDetails(userDetails);
 
-        // Return the token
-        return ResponseEntity.ok(new AuthenticationResponse(token, userDetails.getUsername(), userDetails.getAuthorities()));
+            // Return the token
+            return ResponseEntity.ok(new AuthenticationResponse(token, userDetails.getUsername(), userDetails.getAuthorities()));
+
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+        }
+        // Reload password post-authentication so we can generate token
+
     }
 
     @RequestMapping(path = "/auth", method = RequestMethod.GET)

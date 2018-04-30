@@ -17,7 +17,7 @@ public class TokenUtils {
 
   private final Logger logger = Logger.getLogger(this.getClass());
 
-  @Value("sssshhhh!")
+  @Value("${gustavo.token.secret}")
   private String secret;
 
   /**

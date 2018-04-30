@@ -18,7 +18,8 @@ import java.io.IOException;
 
 public class AuthenticationTokenFilter extends UsernamePasswordAuthenticationFilter {
 
-  @Value("X-Auth-Token")
+//  @Value("X-Auth-Token")
+@Value("${gustavo.token.header}")
   private String tokenHeader;
 
   @Autowired
