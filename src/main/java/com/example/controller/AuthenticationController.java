@@ -32,7 +32,7 @@ import java.util.Collection;
 @RequestMapping("/api")
 public class AuthenticationController {
 
-    private final Logger logger = Logger.getLogger(this.getClass());
+//    private final Logger logger = Logger.getLogger(this.getClass());
 
     @Value("${gustavo.token.header}")
     private String tokenHeader;
@@ -54,8 +54,9 @@ public class AuthenticationController {
     public ResponseEntity<?> authenticationRequest(@RequestBody AuthenticationRequest authenticationRequest) throws AuthenticationException {
 
         // Perform the authentication
+        Authentication authentication = null;
          try{
-        Authentication authentication = this.authenticationManager.authenticate(
+         authentication = this.authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         authenticationRequest.getUsername(),
                         authenticationRequest.getPassword()
@@ -72,7 +73,7 @@ public class AuthenticationController {
             return ResponseEntity.ok(new AuthenticationResponse(token, userDetails.getUsername(), userDetails.getAuthorities()));
 
         }catch(Exception e){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+            return new ResponseEntity(authenticationRequest,HttpStatus.UNAUTHORIZED);
         }
         // Reload password post-authentication so we can generate token
 

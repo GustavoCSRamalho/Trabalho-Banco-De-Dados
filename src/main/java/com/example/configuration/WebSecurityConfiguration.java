@@ -1,7 +1,7 @@
 package com.example.configuration;
 
 import com.example.security.AuthenticationTokenFilter;
-import com.example.security.EntryPointUnauthorizedHandler;
+//import com.example.security.EntryPointUnauthorizedHandler;
 import com.example.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -25,8 +25,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private EntryPointUnauthorizedHandler unauthorizedHandler;
+//    @Autowired
+//    private EntryPointUnauthorizedHandler unauthorizedHandler;
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -75,10 +75,10 @@ class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         httpSecurity
                 .csrf()
                 .disable()
-                .exceptionHandling()
-                .authenticationEntryPoint(this.unauthorizedHandler)
-//                .accessDeniedPage("/403")
-                .and()
+//                .exceptionHandling()
+//                .authenticationEntryPoint(this.unauthorizedHandler)
+//                .accessDeniedPage("/403")//Não usado
+//                .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
