@@ -1,12 +1,8 @@
 package com.example.integration;
 
 import com.example.config.AbstractApplicationTest;
-import com.example.model.entity.Book;
-import com.example.model.entity.EntityBook;
-import com.example.model.factory.BookFactory;
-import com.example.model.json.request.AuthenticationRequest;
-import com.example.model.json.response.AuthenticationResponse;
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.example.domain.model.Book;
+import com.example.domain.json.request.AuthenticationRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.*;
 import org.junit.runner.RunWith;

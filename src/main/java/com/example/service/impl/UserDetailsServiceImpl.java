@@ -1,8 +1,8 @@
 package com.example.service.impl;
 
 
-import com.example.model.entity.User;
-import com.example.model.factory.UserFactory;
+import com.example.domain.model.User;
+import com.example.domain.factory.UserFactory;
 import com.example.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,7 +30,7 @@ public class UserDetailsServiceImpl implements UserDetailsService, UserService {
   @Override
   public void saveUser(User user) throws Error{
 
-    user.setAuthorities("COMUM");
+    user.setAuthorities("USER");
     this.userRepository.save(user);
 
   }

@@ -1,9 +1,9 @@
 package com.example.controller;
 
 
-import com.example.model.entity.Book;
-import com.example.model.entity.EntityBook;
-import com.example.model.factory.BookFactory;
+import com.example.domain.model.Book;
+import com.example.domain.entity.EntityBook;
+import com.example.domain.factory.BookFactory;
 import com.example.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

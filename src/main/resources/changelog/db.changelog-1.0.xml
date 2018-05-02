@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="1" author="Gustavo">
+        <createTable tableName="userTeste">
+            <column autoIncrement="true" name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="Gustavo">
+    <createTable tableName="book">
+        <column autoIncrement="true" name="id" type="bigint">
+            <constraints nullable="false" primaryKey="true"/>
+        </column>
+        <column name="title" type="varchar(255)">
+            <constraints nullable="false"/>
+        </column>
+        <column name="description" type="varchar(255)">
+            <constraints nullable="false"/>
+        </column>
+        <column name="price" type="varchar(255)">
+            <constraints nullable="false"/>
+        </column>
+        <column name="author" type="varchar(255)">
+            <constraints nullable="false"/>
+        </column>
+    </createTable>
+</changeSet>
+
+    <changeSet id="6" author="Gustavo">
+        <createTable tableName="users">
+            <column autoIncrement="true" name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="username" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="authorities" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="7" author="Gustavo">
+        <insert tableName="users">
+            <column name="username" value="admin"/>
+            <column name="password" value="$2a$10$0SsTryuo6ocB42nMSlZ/CeogXjBhh4YuvSyvl6ZtX6jNNTEEJw1a6"/>
+            <column name="email" value="admin@administrador.com"/>
+            <column name="authorities" value="ADMIN"/>
+        </insert>
+    </changeSet>
+
+
+    <!--<changeSet id="1" author="thiago">-->
+        <!--<insert tableName="userTeste" dbms="mysql">-->
+            <!--<column name="name" value="Oqfazer"/>-->
+            <!--<column name="username" value="user_oqfazer"/>-->
+            <!--<column name="password" value="$2a$10$E41FJtpQZwC.SItpj3Zg5.Ym7kCTfOvRoCjO4pp51O96Y2krG9iWi"/>-->
+            <!--<column name="phone" value="12982261635"/>-->
+            <!--<column name="email" value="user@oqfazer.com"/>-->
+            <!--<column name="authorities" value="ROLE_ADMIN"/>-->
+        <!--</insert>-->
+    <!--</changeSet>-->
+
+    <changeSet id="3" author="Gustavo">
+        <insert tableName="userTeste" dbms="mysql">
+            <!--<column name="id" valueNumeric="1"/>-->
+            <column name="name" value="show"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="4" author="Gustavo">
+        <insert tableName="userTeste" dbms="mysql">
+            <!--<column name="id" valueNumeric="2"/>-->
+            <column name="name" value="balada"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="5" author="Gustavo">
+        <insert tableName="book">
+            <column name="title" value="TesteTitulo"/>
+            <column name="description" value="Descricao teste"/>
+            <column name="price" value="R$ : 255,00"/>
+            <column name="author" value="Gustavo 2.0"/>
+        </insert>
+    </changeSet>
+
+
+
+</databaseChangeLog>

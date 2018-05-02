@@ -1,9 +1,9 @@
 package com.example.controller;
 
-import com.example.model.entity.User;
-import com.example.model.json.request.AuthenticationRequest;
-import com.example.model.json.response.AuthenticationResponse;
-import com.example.model.entity.EntityUser;
+import com.example.domain.model.User;
+import com.example.domain.json.request.AuthenticationRequest;
+import com.example.domain.json.response.AuthenticationResponse;
+import com.example.domain.entity.EntityUser;
 import com.example.security.TokenUtils;
 import com.example.service.impl.UserDetailsServiceImpl;
 import org.apache.log4j.Logger;

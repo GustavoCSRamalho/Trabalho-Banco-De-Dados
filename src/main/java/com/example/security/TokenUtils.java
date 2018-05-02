@@ -1,6 +1,6 @@
 package com.example.security;
 
-import com.example.model.entity.EntityUser;
+import com.example.domain.entity.EntityUser;
 import io.jsonwebtoken.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
