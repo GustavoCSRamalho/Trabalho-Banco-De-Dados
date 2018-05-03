@@ -1,7 +1,7 @@
 package com.example.controller;
 
-import com.example.domain.model.Login;
-import com.example.domain.model.Message;
+import com.example.domain.model.login.Login;
+import com.example.domain.model.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;

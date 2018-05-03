@@ -1,12 +1,11 @@
 package com.example.controller;
 
-import com.example.domain.model.User;
-import com.example.domain.json.request.AuthenticationRequest;
-import com.example.domain.json.response.AuthenticationResponse;
+import com.example.domain.model.user.User;
+import com.example.domain.model.json.request.AuthenticationRequest;
+import com.example.domain.model.json.response.AuthenticationResponse;
 import com.example.domain.entity.EntityUser;
 import com.example.security.TokenUtils;
 import com.example.service.impl.UserDetailsServiceImpl;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;

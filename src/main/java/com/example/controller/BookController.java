@@ -1,7 +1,7 @@
 package com.example.controller;
 
 
-import com.example.domain.model.Book;
+import com.example.domain.model.book.Book;
 import com.example.domain.entity.EntityBook;
 import com.example.domain.factory.BookFactory;
 import com.example.service.BookService;

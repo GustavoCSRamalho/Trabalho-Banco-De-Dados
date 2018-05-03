@@ -1,7 +1,7 @@
 package com.example.service.impl;
 
 
-import com.example.domain.model.User;
+import com.example.domain.model.user.User;
 import com.example.domain.factory.UserFactory;
 import com.example.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,7 +2,7 @@ package com.example.service.impl;
 
 
 import com.example.repository.BookRepository;
-import com.example.domain.model.Book;
+import com.example.domain.model.book.Book;
 import com.example.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

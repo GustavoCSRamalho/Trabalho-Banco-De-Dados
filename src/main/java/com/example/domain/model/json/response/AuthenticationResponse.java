@@ -1,4 +1,4 @@
-package com.example.domain.json.response;
+package com.example.domain.model.json.response;
 
 
 import com.example.domain.base.ModelBase;

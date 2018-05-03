@@ -1,4 +1,4 @@
-package com.example.domain.model;
+package com.example.domain.model.login;
 
 
 public class Login {

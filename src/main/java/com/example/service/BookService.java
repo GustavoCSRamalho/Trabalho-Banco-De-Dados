@@ -1,6 +1,6 @@
 package com.example.service;
 
-import com.example.domain.model.Book;
+import com.example.domain.model.book.Book;
 
 import java.util.List;
 

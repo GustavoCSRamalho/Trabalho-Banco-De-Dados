@@ -1,7 +1,7 @@
 package com.example.integration;
 
 import com.example.config.AbstractApplicationTest;
-import com.example.domain.json.request.AuthenticationRequest;
+import com.example.domain.model.json.request.AuthenticationRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Assert;
 import org.junit.Before;

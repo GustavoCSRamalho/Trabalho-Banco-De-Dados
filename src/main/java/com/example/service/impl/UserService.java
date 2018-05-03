@@ -1,7 +1,7 @@
 package com.example.service.impl;
 
 
-import com.example.domain.model.User;
+import com.example.domain.model.user.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 

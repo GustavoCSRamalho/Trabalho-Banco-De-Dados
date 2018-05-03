@@ -1,6 +1,6 @@
 package com.example.domain.factory;
 
-import com.example.domain.model.Book;
+import com.example.domain.model.book.Book;
 import com.example.domain.entity.EntityBook;
 
 public class BookFactory {

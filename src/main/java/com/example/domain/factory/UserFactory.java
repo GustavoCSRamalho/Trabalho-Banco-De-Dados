@@ -1,7 +1,7 @@
 package com.example.domain.factory;
 
 
-import com.example.domain.model.User;
+import com.example.domain.model.user.User;
 import com.example.domain.entity.EntityUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
