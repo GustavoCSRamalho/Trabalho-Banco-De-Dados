@@ -17,18 +17,48 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="8" author="Gustavo">
+        <createTable tableName="information">
+            <column autoIncrement="true" name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="local" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="gender" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="race" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bear" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="image" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
     <changeSet id="2" author="Gustavo">
     <createTable tableName="book">
         <column autoIncrement="true" name="id" type="bigint">
             <constraints nullable="false" primaryKey="true"/>
         </column>
-        <column name="title" type="varchar(255)">
+        <column name="name" type="varchar(255)">
             <constraints nullable="false"/>
         </column>
         <column name="description" type="varchar(255)">
             <constraints nullable="false"/>
         </column>
-        <column name="price" type="varchar(255)">
+        <column name="local" type="varchar(255)">
             <constraints nullable="false"/>
         </column>
         <column name="author" type="varchar(255)">
@@ -93,9 +123,9 @@
 
     <changeSet id="5" author="Gustavo">
         <insert tableName="book">
-            <column name="title" value="TesteTitulo"/>
+            <column name="name" value="TesteTitulo"/>
             <column name="description" value="Descricao teste"/>
-            <column name="price" value="R$ : 255,00"/>
+            <column name="local" value="R$ : 255,00"/>
             <column name="author" value="Gustavo 2.0"/>
         </insert>
     </changeSet>

@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @Transactional
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class BookTeste extends AbstractApplicationTest {
+public class InformationTeste extends AbstractApplicationTest {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
 
