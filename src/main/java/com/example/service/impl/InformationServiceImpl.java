@@ -31,7 +31,7 @@ public class InformationServiceImpl implements InformationService {
         informationUp.setDescription(information.getDescription());
         informationUp.setRace(information.getRace());
         informationUp.setBear(information.getBear());
-        informationUp.setImage(information.getImage());
+//        informationUp.setImage(information.getImage());
         informationUp.setLocal(information.getLocal());
         informationUp.setName(information.getName());
         informationRepository.save(informationUp);

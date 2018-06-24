@@ -40,7 +40,7 @@
             <column name="bear" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="image" type="varchar(255)">
+            <column name="file" type="clob">
                 <constraints nullable="true"/>
             </column>
 

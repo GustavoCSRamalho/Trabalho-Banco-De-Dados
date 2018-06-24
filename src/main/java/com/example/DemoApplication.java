@@ -22,7 +22,6 @@ public class DemoApplication {
 	@Autowired
 	private DataSource dataSource;
 
-
     @Bean
     public LiquibaseProperties liquibaseProperties() {
         return new LiquibaseProperties();

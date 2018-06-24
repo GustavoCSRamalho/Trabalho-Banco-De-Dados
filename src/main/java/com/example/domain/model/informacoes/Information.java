@@ -5,8 +5,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import java.io.File;
 import java.io.Serializable;
 
 @Entity
@@ -14,6 +16,7 @@ import java.io.Serializable;
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(allowGetters = true)
 @Data
+@Component
 public class Information implements Serializable {
 
     @Id
@@ -45,23 +48,22 @@ public class Information implements Serializable {
     @NotEmpty(message = "*Please provide the bearing")
     private String bear;
 
-    @Column(name = "image")
-    private String image;
-
-    //Adicionar ""Porte "" de cachorro, esta pala em ingles "Porte"
+    @Column(name = "file")
+    @NotEmpty(message = "*Please provide the file")
+    private String file;
 
     public Information() {
     }
 
-    public Information(String name, String description, String local, String race,
-                       String gender,String bear, String image) {
-        setName(name);
-        setDescription(description);
-        setLocal(local);
-        setRace(race);
-        setGender(gender);
-        setBear(bear);
-        setImage(image);
+    public Information(InformationRequest informationRequest) {
+        setId(informationRequest.getId());
+        setName(informationRequest.getName());
+        setDescription(informationRequest.getDescription());
+        setLocal(informationRequest.getLocal());
+        setRace(informationRequest.getRace());
+        setGender(informationRequest.getGender());
+        setBear(informationRequest.getBear());
+
     }
 }
 
